@@ -1,7 +1,7 @@
 import { Box, Chip, Typography } from "@mui/material";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
-import Productcard from "../components/ProductCard";
+import Productcard from "../components/HowtoWork";
 import StoreListing from "../components/StoreListing";
 import Footer from "../components/Footer";
 const Home = () => {
