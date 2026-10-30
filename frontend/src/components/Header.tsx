@@ -1,22 +1,45 @@
-import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Button,
+  Paper,
+  InputBase,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LoginIcon from "@mui/icons-material/Login";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
-import type { ReactNode } from "react";
-
-const Header = () => {
+import { useState } from "react";
+import type { FormEvent, ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
+type HeaderProps = {
+  isSearch?: boolean;
+  query?: string;
+};
+const Header = ({ isSearch = false, query = "" }: HeaderProps) => {
+  const navigate = useNavigate();
+  const [value, setValue] = useState(query);
   type Navitem = {
     label: string;
     icon: ReactNode;
   };
-  const navItems: Navitem[] = [
+  const allItems: Navitem[] = [
     { label: "Search", icon: <SearchIcon /> },
     { label: "Store", icon: <StorefrontIcon /> },
     { label: "Wishlist", icon: <FavoriteBorderIcon /> },
     { label: "Login", icon: <LoginIcon /> },
   ];
+  // On the search page, only show Wishlist and Login
+  const navItems = isSearch
+    ? allItems.filter((i) => i.label == "Wishlist" || i.label == "Login")
+    : allItems;
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    navigate("/search", { state: { isSearch: true, query: value.trim() } });
+  };
   return (
     <AppBar
       position="static"
@@ -58,6 +81,35 @@ const Header = () => {
             PriceLens
           </Typography>
         </Box>
+        {/* Search box (only on the search result page) */}
+        {isSearch && (
+          <Paper
+            component="form"
+            onSubmit={handleSubmit}
+            elevation={0}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flex: 1,
+              maxWidth: 440,
+              minWidth: 0,
+              height: 38,
+              px: 1.25,
+              bgcolor: "#f5f5f7",
+              border: "1px solid #dedee3",
+              borderRadius: 2,
+            }}
+          >
+            <SearchIcon sx={{ color: "#50515a", fontSize: 18, mr: 1 }} />
+            <InputBase
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder="Search products"
+              inputProps={{ "aria-label": "Search products" }}
+              sx={{ flex: 1, minWidth: 0, fontSize: { xs: 13, sm: 14 } }}
+            />
+          </Paper>
+        )}
         <Box
           component="nav"
           sx={{ display: "flex", alignItems: "center", flexShrink: 0 }}

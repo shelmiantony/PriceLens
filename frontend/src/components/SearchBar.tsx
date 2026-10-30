@@ -1,10 +1,13 @@
 import { Box, Paper, InputBase, Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import { useState, type FormEvent } from "react";
 const SearchBar = () => {
   const navigate = useNavigate();
-  const handleSearch = () => {
-    navigate("/search", { state: { isSearch: true } });
+  const [query, setQuery] = useState("");
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    navigate("/search", { state: { isSearch: true, query: query.trim() } });
   };
   return (
     <Box
@@ -20,6 +23,7 @@ const SearchBar = () => {
       {" "}
       <Paper
         component="form"
+        onSubmit={handleSearch}
         sx={{
           display: "flex",
           alignItems: "center",
@@ -37,6 +41,8 @@ const SearchBar = () => {
         <SearchIcon sx={{ color: "#50515a", fontSize: 18, mr: 1 }} />
         <InputBase
           placeholder="Eyelinear"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           inputProps={{ "aria-label": "Search products" }}
           sx={{ flex: 1, minWidth: 0, fontSize: { xs: 13, sm: 14 } }}
         ></InputBase>
@@ -44,7 +50,6 @@ const SearchBar = () => {
           type="submit"
           variant="contained"
           disableElevation
-          onClick={handleSearch}
           sx={{
             minHeight: 30,
             minWidth: { xs: 58, sm: 64 },
