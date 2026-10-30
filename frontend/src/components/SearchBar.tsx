@@ -1,6 +1,11 @@
 import { Box, Paper, InputBase, Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    navigate("/search", { state: { isSearch: true } });
+  };
   return (
     <Box
       sx={{
@@ -39,6 +44,7 @@ const SearchBar = () => {
           type="submit"
           variant="contained"
           disableElevation
+          onClick={handleSearch}
           sx={{
             minHeight: 30,
             minWidth: { xs: 58, sm: 64 },
