@@ -58,7 +58,11 @@ const ProductInfo = () => {
     <Box
       sx={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,220px),1fr))",
+        gridTemplateColumns: {
+          xs: "minmax(0, 1fr)",
+          sm: "repeat(2, minmax(0, 1fr))",
+          lg: "repeat(3, minmax(0, 1fr))",
+        },
         gap: 2.5,
       }}
     >
@@ -77,17 +81,17 @@ const ProductInfo = () => {
             role="img"
             aria-label={`${product.name} product image placeholder`}
             sx={{
-              heigth: { xs: 150, sm: 170 },
-              bgColor: product.color,
+              height: { xs: 150, sm: 170 },
+              backgroundColor: product.color,
               display: "grid",
               placeItems: "center",
               color: "#555362",
               fontSize: 14,
             }}
           >
-            Product Image
+            Product image
           </Box>
-          <Box sx={{ p: 2, minHeight: 148, boxSizing: "border-box" }}>
+          <Box sx={{ p: 2, minHeight: 155, boxSizing: "border-box" }}>
             <Typography sx={{ color: "#5f5c6c", fontSize: 14, mb: 0.25 }}>
               {product.brand}
             </Typography>
@@ -122,7 +126,7 @@ const ProductInfo = () => {
                   fontWeight: 700,
                 }}
               >
-                {product.price}
+                ₹{product.price}
               </Typography>
             </Box>
             <Typography

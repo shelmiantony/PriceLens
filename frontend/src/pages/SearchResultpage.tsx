@@ -1,5 +1,6 @@
 import {
   Box,
+  Checkbox,
   Divider,
   FormControl,
   FormControlLabel,
@@ -13,7 +14,6 @@ import { useLocation } from "react-router-dom";
 
 import Header from "../components/Header";
 import { useState } from "react";
-import { CheckBox } from "@mui/icons-material";
 import ProductInfo from "../components/ProductInfo";
 const SearchResultPage = () => {
   const { state } = useLocation();
@@ -36,7 +36,7 @@ const SearchResultPage = () => {
         sx={{
           width: "100%",
           maxWidth: 1360,
-          minHeight: "calc(100vh-90px)",
+          minHeight: "calc(100vh - 90px)",
           mx: "auto",
           bgcolor: "#f7f7f9",
           border: "1px solid #dedee3",
@@ -111,6 +111,9 @@ const SearchResultPage = () => {
           display: "grid",
           gridTemplate: { xs: "1fr", md: "280px minmax(0,1fr)" },
           gap: { xs: 2.5, md: 4 },
+          maxWidth: 1333,
+          mx: "auto",
+          px: { xs: 2, sm: 3, md: 0 },
           mt: { xs: 3, sm: 4 },
           pb: 5,
           alignItems: "start",
@@ -142,7 +145,7 @@ const SearchResultPage = () => {
                   "& .MuiFormControlLabel-label": { fontSize: 15 },
                 }}
                 control={
-                  <CheckBox
+                <Checkbox
                     size="small"
                     checked={true}
                     sx={{
@@ -157,8 +160,8 @@ const SearchResultPage = () => {
           <Typography sx={{ fontSize: 16, fontWeight: 700, mb: 1 }}>
             Price
           </Typography>
-          <RadioGroup value={true} sx={{ mb: 2.5 }}>
-            {priceRanges.map((value, label) => (
+          <RadioGroup value="any" sx={{ mb: 2.5 }}>
+            {priceRanges.map(({ value, label }) => (
               <FormControlLabel
                 key={value}
                 value={value}
@@ -177,7 +180,7 @@ const SearchResultPage = () => {
                     }}
                   />
                 }
-              ></FormControlLabel>
+              />
             ))}
           </RadioGroup>
           <Typography sx={{ fontSize: 16, fontWeight: 700, mb: 1.25 }}>
@@ -194,7 +197,7 @@ const SearchResultPage = () => {
                   "& .MuiFormControlLabel-label": { fontSize: 15 },
                 }}
                 control={
-                  <CheckBox
+                  <Checkbox
                     size="small"
                     sx={{
                       color: "#92909a",
@@ -213,12 +216,13 @@ const SearchResultPage = () => {
               "& .MuiFormControlLabel-label": { fontSize: 15, fontWeight: 600 },
             }}
             control={
-              <CheckBox
+              <Checkbox
+                checked
                 size="small"
                 sx={{ color: "#92909a", "&.Mui-checked": { color: "#67259a" } }}
               />
             }
-          ></FormControlLabel>
+          />
         </Box>
         {/* productCard */}
         <ProductInfo />
