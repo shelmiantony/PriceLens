@@ -1,6 +1,5 @@
 import {
   Box,
-  Checkbox,
   Divider,
   FormControl,
   FormControlLabel,
@@ -8,12 +7,14 @@ import {
   Radio,
   RadioGroup,
   Select,
+  Checkbox,
   Typography,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 import Header from "../components/Header";
 import { useState } from "react";
+import { CheckBox } from "@mui/icons-material";
 import ProductInfo from "../components/ProductInfo";
 const SearchResultPage = () => {
   const { state } = useLocation();
@@ -36,7 +37,7 @@ const SearchResultPage = () => {
         sx={{
           width: "100%",
           maxWidth: 1360,
-          minHeight: "calc(100vh - 90px)",
+          minHeight: "calc(100vh-90px)",
           mx: "auto",
           bgcolor: "#f7f7f9",
           border: "1px solid #dedee3",
@@ -104,128 +105,131 @@ const SearchResultPage = () => {
             </FormControl>
           </Box>
         </Box>
-      </Box>
-      {/* store selection */}
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplate: { xs: "1fr", md: "280px minmax(0,1fr)" },
-          gap: { xs: 2.5, md: 4 },
-          maxWidth: 1333,
-          mx: "auto",
-          px: { xs: 2, sm: 3, md: 0 },
-          mt: { xs: 3, sm: 4 },
-          pb: 5,
-          alignItems: "start",
-        }}
-      >
+
+        {/* store selection */}
         <Box
-          component="aside"
-          aria-label="Product filters"
           sx={{
-            bgcolor: "#fff",
-            border: "1px solid #e1dfe8",
-            borderRadius: "16px",
-            p: { xs: 2.5, sm: 3 },
-            color: "#191923",
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "280px minmax(0,1fr)" },
+            gap: { xs: 2.5, md: 4 },
+            mt: { xs: 3, sm: 4 },
+            pb: 5,
+            alignItems: "start",
           }}
         >
-          <Typography sx={{ fontSize: 16, fontWeight: 700, mb: 1.25 }}>
-            Stores
-          </Typography>
-          <Box sx={{ display: "flex", flexDirection: "column", mb: 2 }}>
-            {" "}
-            {stores.map((store) => (
-              <FormControlLabel
-                key={store}
-                label={store}
-                sx={{
-                  m: 0,
-                  minHeight: 38,
-                  "& .MuiFormControlLabel-label": { fontSize: 15 },
-                }}
-                control={
-                <Checkbox
-                    size="small"
-                    checked={true}
-                    sx={{
-                      color: "#92909a",
-                      "&.Mui-checked": { color: "#67259a" },
-                    }}
-                  />
-                }
-              />
-            ))}
-          </Box>
-          <Typography sx={{ fontSize: 16, fontWeight: 700, mb: 1 }}>
-            Price
-          </Typography>
-          <RadioGroup value="any" sx={{ mb: 2.5 }}>
-            {priceRanges.map(({ value, label }) => (
-              <FormControlLabel
-                key={value}
-                value={value}
-                label={label}
-                sx={{
-                  m: 0,
-                  minHeight: 38,
-                  "& .MuiFormControlLabel-label": { fontSize: 15 },
-                }}
-                control={
-                  <Radio
-                    size="small"
-                    sx={{
-                      color: "#92909a",
-                      "&.Mui-checked": { color: "#67259a" },
-                    }}
-                  />
-                }
-              />
-            ))}
-          </RadioGroup>
-          <Typography sx={{ fontSize: 16, fontWeight: 700, mb: 1.25 }}>
-            Brand
-          </Typography>
-          <Box sx={{ display: "flex", flexDirection: "column", mb: 2.5 }}>
-            {brands.map((brand) => (
-              <FormControlLabel
-                key={brand}
-                label={brand}
-                sx={{
-                  m: 0,
-                  minHeight: 38,
-                  "& .MuiFormControlLabel-label": { fontSize: 15 },
-                }}
-                control={
-                  <Checkbox
-                    size="small"
-                    sx={{
-                      color: "#92909a",
-                      "&.Mui-checked": { color: "#67259a" },
-                    }}
-                  />
-                }
-              ></FormControlLabel>
-            ))}
-          </Box>
-          <Divider sx={{ mb: 2 }} />
-          <FormControlLabel
-            label="In stock only"
+          <Box
+            component="aside"
+            aria-label="Product filters"
             sx={{
-              m: 0,
-              "& .MuiFormControlLabel-label": { fontSize: 15, fontWeight: 600 },
+              bgcolor: "#fff",
+              border: "1px solid #e1dfe8",
+              borderRadius: "16px",
+              p: { xs: 2.5, sm: 3 },
+              color: "#191923",
             }}
-            control={
-              <Checkbox
-                checked
-                size="small"
-                sx={{ color: "#92909a", "&.Mui-checked": { color: "#67259a" } }}
-              />
-            }
-          />
+          >
+            <Typography sx={{ fontSize: 16, fontWeight: 700, mb: 1.25 }}>
+              Stores
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", mb: 2 }}>
+              {" "}
+              {stores.map((store) => (
+                <FormControlLabel
+                  key={store}
+                  label={store}
+                  sx={{
+                    m: 0,
+                    minHeight: 38,
+                    "& .MuiFormControlLabel-label": { fontSize: 15 },
+                  }}
+                  control={
+                    <Checkbox
+                      size="small"
+                      checked={true}
+                      sx={{
+                        color: "#92909a",
+                        "&.Mui-checked": { color: "#67259a" },
+                      }}
+                    />
+                  }
+                />
+              ))}
+            </Box>
+            <Typography sx={{ fontSize: 16, fontWeight: 700, mb: 1 }}>
+              Price
+            </Typography>
+            <RadioGroup value={true} sx={{ mb: 2.5 }}>
+              {priceRanges.map((value, label) => (
+                <FormControlLabel
+                  key={value}
+                  value={value}
+                  label={label}
+                  sx={{
+                    m: 0,
+                    minHeight: 38,
+                    "& .MuiFormControlLabel-label": { fontSize: 15 },
+                  }}
+                  control={
+                    <Radio
+                      size="small"
+                      sx={{
+                        color: "#92909a",
+                        "&.Mui-checked": { color: "#67259a" },
+                      }}
+                    />
+                  }
+                ></FormControlLabel>
+              ))}
+            </RadioGroup>
+            <Typography sx={{ fontSize: 16, fontWeight: 700, mb: 1.25 }}>
+              Brand
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", mb: 2.5 }}>
+              {brands.map((brand) => (
+                <FormControlLabel
+                  key={brand}
+                  label={brand}
+                  sx={{
+                    m: 0,
+                    minHeight: 38,
+                    "& .MuiFormControlLabel-label": { fontSize: 15 },
+                  }}
+                  control={
+                    <Checkbox
+                      size="small"
+                      sx={{
+                        color: "#92909a",
+                        "&.Mui-checked": { color: "#67259a" },
+                      }}
+                    />
+                  }
+                ></FormControlLabel>
+              ))}
+            </Box>
+            <Divider sx={{ mb: 2 }} />
+            <FormControlLabel
+              label="In stock only"
+              sx={{
+                m: 0,
+                "& .MuiFormControlLabel-label": {
+                  fontSize: 15,
+                  fontWeight: 600,
+                },
+              }}
+              control={
+                <Checkbox
+                  size="small"
+                  sx={{
+                    color: "#92909a",
+                    "&.Mui-checked": { color: "#67259a" },
+                  }}
+                />
+              }
+            ></FormControlLabel>
+          </Box>
+          {/* productCard */}
+          <ProductInfo />
         </Box>
-        {/* productCard */}
-        <ProductInfo />
       </Box>
     </Box>
   );
