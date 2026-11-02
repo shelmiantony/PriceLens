@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 
-const Productcard = () => {
+const HowtoWork = () => {
   const steps = [
     {
       number: "1",
@@ -109,4 +109,4 @@ const Productcard = () => {
     </Box>
   );
 };
-export default Productcard;
+export default HowtoWork;
