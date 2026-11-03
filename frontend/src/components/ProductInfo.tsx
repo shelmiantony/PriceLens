@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-
+import { Link as RouterLink } from "react-router-dom";
 const ProductInfo = () => {
   type Product = {
     brand: string;
@@ -96,11 +96,15 @@ const ProductInfo = () => {
               {product.brand}
             </Typography>
             <Typography
+              component={RouterLink}
+              to={`/search/${product.name}`}
               sx={{
                 color: "#191923",
                 fontSize: 16,
                 lineHeight: 1.3,
                 fontWeight: 600,
+                textDecoration: "none",
+                "&:hover": { color: "#67259a", textDecoration: "underline" },
               }}
             >
               {product.name}
